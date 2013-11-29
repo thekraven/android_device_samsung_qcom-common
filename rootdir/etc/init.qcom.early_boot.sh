@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -79,9 +79,6 @@ case "$1" in
                 ;;
             *)
                 case "$soc_hwid" in
-                    "142") #8x30 QRD
-                        setprop ro.sf.lcd_density 320
-                        ;;
                     "109")
                         setprop ro.sf.lcd_density 160
                         ;;
@@ -93,18 +90,18 @@ case "$1" in
         esac
 
         #Set up MSM-specific configuration
-        #case "$soc_hwid" in
-        #    87)
-        #        #8960
-        #        setprop debug.composition.type dyn
-        #        ;;
-        #    153 | 154 | 155 | 156 | 157 | 138 | 179 | 180 | 181)
-        #        #8064 V2 PRIME | 8930AB | 8630AB | 8230AB | 8030AB | 8960AB | 8130/AA/AB
-        #        setprop debug.composition.type c2d
-        #        ;;
-        #    *)
-        #        ;;
-        #esac
+        case "$soc_hwid" in
+            87)
+                #8960
+                #setprop debug.composition.type dyn
+                ;;
+            153 | 154 | 155 | 156 | 157 | 138 | 179 | 180 | 181)
+                #8064 V2 PRIME | 8930AB | 8630AB | 8230AB | 8030AB | 8960AB | 8130/AA/AB
+                #setprop debug.composition.type c2d
+                ;;
+            *)
+                ;;
+        esac
 
         case "$soc_hwid" in
             87 | 116 | 117 | 118 | 119 | 138 | 142 | 143 | 144 | 154 | 155 | 156 | 157 | 179 | 180 | 181)
@@ -142,8 +139,3 @@ do
     esac
     fb_cnt=$(( $fb_cnt + 1))
 done
-
-# Set date to a time after 2008
-# This is a workaround for Zygote to preload time related classes properly
-# date -s 20090102.130000
-
